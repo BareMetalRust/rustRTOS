@@ -92,6 +92,9 @@ ${COMPILER}/freertos_demo.axf: ${COMPILER}/tasks.o
 ${COMPILER}/freertos_demo.axf: ${COMPILER}/uartstdio.o
 ${COMPILER}/freertos_demo.axf: ${COMPILER}/ustdlib.o
 ${COMPILER}/freertos_demo.axf: ${ROOT}/driverlib/${COMPILER}/libdriver.a
+${ROOT}/driverlib/${COMPILER}/libdriver.a:
+	make -C ${ROOT}/driverlib
+
 ${COMPILER}/freertos_demo.axf: freertos_demo.ld
 SCATTERgcc_freertos_demo=freertos_demo.ld
 ENTRY_freertos_demo=ResetISR
