@@ -157,7 +157,7 @@ ConfigureUART(void)
 //
 //*****************************************************************************
 int
-main(void)
+main_loop(void)
 {
     //
     // Set the clocking to run at 50 MHz from the PLL.

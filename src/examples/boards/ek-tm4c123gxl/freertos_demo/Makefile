@@ -61,7 +61,7 @@ IPATH+=../../../../third_party
 # The default rule, which causes the FreeRTOS example to be built.
 #
 all: ${COMPILER}
-all: ${COMPILER}/freertos_demo.axf
+all: ${COMPILER}/libfreertos_demo.a
 
 #
 # The rule to clean out all the build products.
@@ -78,25 +78,30 @@ ${COMPILER}:
 #
 # Rules for building the FreeRTOS example.
 #
-${COMPILER}/freertos_demo.axf: ${COMPILER}/buttons.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/freertos_demo.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/heap_2.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/led_task.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/list.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/port.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/queue.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/rgb.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/startup_${COMPILER}.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/switch_task.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/tasks.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/uartstdio.o
-${COMPILER}/freertos_demo.axf: ${COMPILER}/ustdlib.o
-${COMPILER}/freertos_demo.axf: ${ROOT}/driverlib/${COMPILER}/libdriver.a
+COBJS=${COMPILER}/buttons.o \
+      ${COMPILER}/freertos_demo.o \
+      ${COMPILER}/heap_2.o \
+      ${COMPILER}/led_task.o \
+      ${COMPILER}/list.o \
+      ${COMPILER}/port.o \
+      ${COMPILER}/queue.o \
+      ${COMPILER}/rgb.o \
+      ${COMPILER}/startup_${COMPILER}.o \
+      ${COMPILER}/switch_task.o \
+      ${COMPILER}/tasks.o \
+      ${COMPILER}/uartstdio.o \
+      ${COMPILER}/ustdlib.o
+
+${COMPILER}/libfreertos_demo.a: ${COBJS}
+
 ${ROOT}/driverlib/${COMPILER}/libdriver.a:
 	make -C ${ROOT}/driverlib
 
-${COMPILER}/freertos_demo.axf: freertos_demo.ld
-SCATTERgcc_freertos_demo=freertos_demo.ld
+# ${COMPILER}/freertos_demo.axf: ${ROOT}/driverlib/${COMPILER}/libdriver.a ${COMPILER}/freertos_demo.a
+
+
+# ${COMPILER}/freertos_demo.axf: freertos_demo.ld
+# SCATTERgcc_freertos_demo=freertos_demo.ld
 ENTRY_freertos_demo=ResetISR
 CFLAGSgcc=-DTARGET_IS_TM4C123_RB1
 

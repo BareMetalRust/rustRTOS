@@ -14,6 +14,7 @@
 *.a
 *.la
 *.lo
+*.rlib # Rust lib
 
 # Shared objects (inc. Windows DLLs)
 *.dll
@@ -33,3 +34,6 @@
 
 # Debug files
 *.dSYM/
+
+# VIM files
+*.swp
