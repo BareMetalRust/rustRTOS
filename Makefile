@@ -40,7 +40,8 @@ CPFLAGS = -Obinary
 # flags for objectdump
 ODFLAGS = -S
 
-LIBS := libdriver.a libfreertos_demo.a
+LIBS := libfreertos_demo.a libdriver.a 
+SYSLIBS := /usr/lib/gcc/arm-none-eabi/4.9.3/../../../arm-none-eabi/lib/armv7e-m/softfp/libm.a /usr/lib/gcc/arm-none-eabi/4.9.3/../../../arm-none-eabi/lib/armv7e-m/softfp/libc.a /usr/lib/gcc/arm-none-eabi/4.9.3/armv7e-m/softfp/libgcc.a
 OBJS := main.o
 
 
@@ -51,7 +52,7 @@ libs: libcore.rlib $(LIBS)
 ${PROJECT_NAME}.axf: libs $(OBJS)
 	@echo
 	@echo Linking...
-	$(LD) -T $(LINKER_FILE) $(LFLAGS) -o ${PROJECT_NAME}.axf $(OBJS) $(LIBS)
+	$(LD) -T $(LINKER_FILE) $(LFLAGS) --entry ResetISR -o ${PROJECT_NAME}.axf $(OBJS) $(LIBS) $(SYSLIBS)
 
 ${PROJECT_NAME}: ${PROJECT_NAME}.axf
 	@echo
@@ -92,5 +93,4 @@ libcore.rlib:
 libdriver.a:
 	make -C src/driverlib
 	cp src/driverlib/${COMPILER}/libdriver.a .
-
 
