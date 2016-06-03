@@ -16,11 +16,11 @@ pub fn panic_fmt(_fmt: &core::fmt::Arguments, _file_line: &(&'static str, usize)
     loop { }
 }
 
-#[no_mangle]
-pub unsafe fn __aeabi_unwind_cpp_pr0() -> ()
-{
-    loop {}
-}
+/* #[no_mangle] */
+/* pub unsafe fn __aeabi_unwind_cpp_pr0() -> () */
+/* { */
+/*     loop {} */
+/* } */
 #[no_mangle] pub fn main()
 {
     unsafe { main_loop() };

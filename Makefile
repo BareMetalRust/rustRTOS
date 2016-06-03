@@ -110,3 +110,7 @@ libdriver.a:
 	make -C src/driverlib
 	cp src/driverlib/${COMPILER}/libdriver.a .
 
+# make clean rule
+clean:
+	rm -f *.bin *.o *.d *.a *.axf *.lst
+

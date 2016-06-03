@@ -55,4 +55,10 @@ SECTIONS
         *(COMMON)
         _ebss = .;
     } > SRAM
+
+    /DISCARD/ :
+    {
+		*(.ARM.exidx*)
+		*(.gnu.linkonce.armexidx.*)
+    }
 }
