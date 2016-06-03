@@ -40,8 +40,24 @@ CPFLAGS = -Obinary
 # flags for objectdump
 ODFLAGS = -S
 
+#
+# Get the location of libgcc.a from the GCC front-end.
+#
+LIBGCC:=${shell ${CC} ${CFLAGS} -print-libgcc-file-name}
+
+#
+# Get the location of libc.a from the GCC front-end.
+#
+LIBC:=${shell ${CC} ${CFLAGS} -print-file-name=libc.a}
+
+#
+# Get the location of libm.a from the GCC front-end.
+#
+LIBM:=${shell ${CC} ${CFLAGS} -print-file-name=libm.a}
+
+
 LIBS := libfreertos_demo.a libdriver.a 
-SYSLIBS := /usr/lib/gcc/arm-none-eabi/4.9.3/../../../arm-none-eabi/lib/armv7e-m/softfp/libm.a /usr/lib/gcc/arm-none-eabi/4.9.3/../../../arm-none-eabi/lib/armv7e-m/softfp/libc.a /usr/lib/gcc/arm-none-eabi/4.9.3/armv7e-m/softfp/libgcc.a
+SYSLIBS := ${LIBM}  ${LIBC} ${LIBGCC}
 OBJS := main.o
 
 
